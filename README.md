@@ -121,6 +121,8 @@ A link lookup function is called for every link found, and it receives the follo
 
 The lookup function _may_ be asynchronous. It _must_ return either a link object which has the above properties, or a promise that resolves with a link object.
 
+If the link object has any additional properties, they will be used to set attributes on the resulting `a` element. The `className` property should be used in place of `class`.
+
 If the lookup function throws an error, the link's raw text will be output with no further parsing. If the returned link has an `override` property which is set to a string, the link will be output as _exactly_ that string with no further parsing.
 
 See the [examples](#examples) for implementations.
