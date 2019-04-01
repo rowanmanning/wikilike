@@ -1,0 +1,1067 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid link (basic, escaped inner closer)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "",
+    "location": "hello]",
+    "raw": "[[hello\\\\]]",
+    "state": "closing",
+    "type": "link",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid link (basic, escaped inner opener)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[\\\\[hello]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid link (basic, no location)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[[  ]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid link (basic, single opener and closer)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid link (labelled, escaped inner closer)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "hi]",
+    "location": "hello",
+    "raw": "[[hello|hi\\\\]]",
+    "state": "closing",
+    "type": "link",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid link (labelled, escaped inner opener)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[\\\\[hello|hi]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid link (labelled, extra pipe)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[[hello|hi|hey]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid link (labelled, no location)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[[  |hi]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid links (basic, broken closer)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[[hello] ] [[hello] [[hello]a] [[hello]a]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid links (basic, broken openers)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[ [hello]] [hello]] [a[hello]] [[a[hello]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid links (basic, line break)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[[
+hello]] [[hello
+]] [[
+hello]] [[hello
+]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid links (labelled, broken closer)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[[hello|hi] ] [[hello|hi] [[hello|hi]a] [[hello|hi]a]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid links (labelled, broken opener)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[ [hello|hi]] [hello|hi]] [a[hello|hi]] [[a[hello|hi]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "invalid links (labelled, line break)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[[
+hello|hi]] [[hello|hi
+]] [[hello
+|
+hi]] [[
+hello|hi]] [[hello|hi
+]] [[hello
+|
+hi]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, alone)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello",
+    "raw": "[[hello]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, alone, escaped closer)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello]world",
+    "raw": "[[hello\\\\]world]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, alone, escaped command)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "command>hello",
+    "raw": "[[command\\\\>hello]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, alone, escaped divider)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello|world",
+    "raw": "[[hello\\\\|world]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, alone, escaped escape)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello\\\\world",
+    "raw": "[[hello\\\\\\\\world]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, alone, escaped opener)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello[world",
+    "raw": "[[hello\\\\[world]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, alone, extra closer)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello",
+    "raw": "[[hello]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, alone, extra opener and closer)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello",
+    "raw": "[[hello]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, alone, extra opener)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello",
+    "raw": "[[hello]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, alone, path)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "/example/path",
+    "raw": "[[/example/path]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, default command, alone)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "command": "cmd",
+    "label": null,
+    "location": "hello",
+    "raw": "[[>hello]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, specified command, alone)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "command": "mock",
+    "label": null,
+    "location": "hello",
+    "raw": "[[mock>hello]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, specified command, alone, spaced)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "command": "mock",
+    "label": null,
+    "location": "hello",
+    "raw": "[[  mock  >  hello  ]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, text after)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello",
+    "raw": "[[hello]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " this is text",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, text around)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "this is text ",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello",
+    "raw": "[[hello]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " this is text",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (basic, text before)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "this is text ",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello",
+    "raw": "[[hello]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, alone)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[hello|hi]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, alone, escaped closer)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "hi]planet",
+    "location": "hello world",
+    "raw": "[[hello world|hi\\\\]planet]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, alone, escaped command)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "hi>planet",
+    "location": "hello world",
+    "raw": "[[hello world|hi\\\\>planet]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, alone, escaped divider)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "hi|planet",
+    "location": "hello world",
+    "raw": "[[hello world|hi\\\\|planet]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, alone, escaped escape)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "hi\\\\planet",
+    "location": "hello world",
+    "raw": "[[hello world|hi\\\\\\\\planet]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, alone, escaped opener)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "hi[planet",
+    "location": "hello world",
+    "raw": "[[hello world|hi\\\\[planet]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, alone, extra closer)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[hello|hi]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, alone, extra opener and closer)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[",
+    "type": "text",
+  },
+  Object {
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[hello|hi]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, alone, extra opener)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[",
+    "type": "text",
+  },
+  Object {
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[hello|hi]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, alone, path)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "example",
+    "location": "/example/path",
+    "raw": "[[/example/path|example]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, command in label, alone)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "mock>hi",
+    "location": "hello",
+    "raw": "[[hello|mock>hi]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, default command, alone)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "command": "cmd",
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[>hello|hi]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, empty label)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello",
+    "raw": "[[hello|]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, specified command, alone)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "command": "mock",
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[mock>hello|hi]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, specified command, alone, spaced)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "command": "mock",
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[  mock  >  hello  |  hi  ]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, text after)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[hello|hi]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " this is text",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, text around)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "this is text ",
+    "type": "text",
+  },
+  Object {
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[hello|hi]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " this is text",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid link (labelled, text before)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "this is text ",
+    "type": "text",
+  },
+  Object {
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[hello|hi]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid links (basic, spaced)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello",
+    "raw": "[[ hello ]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " ",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "world",
+    "raw": "[[  world  ]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " ",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "and",
+    "raw": "[[   and   ]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " ",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "moon",
+    "raw": "[[	moon	]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid links (basic, text around)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "this is text ",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello",
+    "raw": "[[hello]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " this is text ",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "world",
+    "raw": "[[world]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " this is text",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid links (labelled, spaced)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[ hello | hi ]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " ",
+    "type": "text",
+  },
+  Object {
+    "label": "earth",
+    "location": "world",
+    "raw": "[[  world  |  earth  ]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " ",
+    "type": "text",
+  },
+  Object {
+    "label": "&",
+    "location": "and",
+    "raw": "[[   and   |   &   ]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " ",
+    "type": "text",
+  },
+  Object {
+    "label": "satellite",
+    "location": "moon",
+    "raw": "[[	moon	|	satellite	]]",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) .parse(input) for input "valid links (labelled, text around)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "this is text ",
+    "type": "text",
+  },
+  Object {
+    "label": "hi",
+    "location": "hello",
+    "raw": "[[hello|hi]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " this is text ",
+    "type": "text",
+  },
+  Object {
+    "label": "earth",
+    "location": "world",
+    "raw": "[[world|earth]]",
+    "type": "link",
+  },
+  Object {
+    "raw": " this is text",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) when all of the customisation options are set .parse(input) for input "standard link" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "[[hello]]",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) when all of the customisation options are set .parse(input) for input "valid link (basic)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello",
+    "raw": "{{hello}}",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) when all of the customisation options are set .parse(input) for input "valid link (basic, default command)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "command": "mock",
+    "label": null,
+    "location": "hello",
+    "raw": "{{👑hello}}",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) when all of the customisation options are set .parse(input) for input "valid link (basic, escaped)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": null,
+    "location": "hello{world",
+    "raw": "{{hello~{world}}",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) when all of the customisation options are set .parse(input) for input "valid link (basic, specified command)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "command": "hi",
+    "label": null,
+    "location": "hello",
+    "raw": "{{hi👑hello}}",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;
+
+exports[`lib/link-parser new LinkParser(options) when all of the customisation options are set .parse(input) for input "valid link (labelled, alone)" returns the expected tokens 1`] = `
+Array [
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+  Object {
+    "label": "hi",
+    "location": "hello",
+    "raw": "{{hello*hi}}",
+    "type": "link",
+  },
+  Object {
+    "raw": "",
+    "type": "text",
+  },
+]
+`;

@@ -1,0 +1,33 @@
+{
+  "name": "@rowanmanning/wikilike",
+  "version": "0.0.0",
+  "description": "Parse and render wiki-like links",
+  "keywords": [
+    "wiki",
+    "parser"
+  ],
+  "author": "Rowan Manning (https://rowanmanning.com/)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rowanmanning/wikilike.git"
+  },
+  "homepage": "https://github.com/rowanmanning/wikilike",
+  "bugs": "https://github.com/rowanmanning/wikilike/issues",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "hyperons": "^1.0.0-beta.2"
+  },
+  "devDependencies": {
+    "@rowanmanning/eslint-config": "^2.0.0",
+    "@rowanmanning/make": "^1.2.0",
+    "eslint": "^5.15.3",
+    "jest": "^24.5.0"
+  },
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "make ci"
+  }
+}

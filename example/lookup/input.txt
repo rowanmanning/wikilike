@@ -1,0 +1,8 @@
+
+Link to a page that exists: [[ apple ]].
+
+Link to a page that exists with label: [[ banana | Yellow Fruit ]].
+
+Link to a page that does not exist: [[ lemon ]].
+
+Link to a page that does not exist with label: [[ lemon | Sour Fruit ]].

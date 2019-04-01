@@ -1,0 +1,6 @@
+
+Link to a page: [[ apple ]].
+
+Embedded content about a [[ banana ]]:
+
+[[embed> banana ]]

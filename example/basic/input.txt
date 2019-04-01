@@ -1,0 +1,4 @@
+
+This is some text with a [[ link ]].
+
+This is some text with a [[ link | link that has a label ]].
