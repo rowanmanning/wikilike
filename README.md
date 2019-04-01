@@ -1,5 +1,5 @@
 
-# @rowanmanning/wikilink
+# @rowanmanning/wikilike
 
 Parse and render wiki-like links.
 
@@ -58,13 +58,13 @@ This library requires the following to run:
 Install with [npm](https://www.npmjs.com/):
 
 ```sh
-npm install @rowanmanning/wikilink
+npm install @rowanmanning/wikilike
 ```
 
 Load the library into your code with a `require` call:
 
 ```js
-const LinkParser = require('@rowanmanning/wikilink');
+const LinkParser = require('@rowanmanning/wikilike');
 ```
 
 ### Creating a parser
