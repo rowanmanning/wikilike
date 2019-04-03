@@ -281,8 +281,9 @@ describe('lib/link-parser', () => {
 
 		});
 
-		describe('.render(input, linkTransform)', () => {
+		describe('.render(input, linkTransform, lookupContext)', () => {
 			let linkTransform;
+			let lookupContext;
 			let resolvedValue;
 			let tokens;
 
@@ -301,6 +302,9 @@ describe('lib/link-parser', () => {
 						raw: 'mock-link-2'
 					}
 				];
+				lookupContext = {
+					mockLookupContext: true
+				};
 				jest.spyOn(instance, 'parse').mockReturnValue(tokens);
 				linkTransform = jest.fn()
 					.mockReturnValueOnce('mock-link-transform-1')
@@ -312,7 +316,7 @@ describe('lib/link-parser', () => {
 					.mockResolvedValueOnce({
 						mockLinkLookupResult: 2
 					});
-				resolvedValue = await instance.render('mock-input', linkTransform);
+				resolvedValue = await instance.render('mock-input', linkTransform, lookupContext);
 			});
 
 			it('parses the input', () => {
@@ -322,8 +326,8 @@ describe('lib/link-parser', () => {
 
 			it('looks up each of the links', () => {
 				expect(instance.options.linkLookup).toHaveBeenCalledTimes(2);
-				expect(instance.options.linkLookup).toHaveBeenCalledWith(tokens[0]);
-				expect(instance.options.linkLookup).toHaveBeenCalledWith(tokens[2]);
+				expect(instance.options.linkLookup).toHaveBeenCalledWith(tokens[0], lookupContext);
+				expect(instance.options.linkLookup).toHaveBeenCalledWith(tokens[2], lookupContext);
 			});
 
 			it('transforms each of the looked up values', () => {
@@ -340,6 +344,22 @@ describe('lib/link-parser', () => {
 				expect(resolvedValue).toStrictEqual('mock-link-transform-1\nmock-text\nmock-link-transform-2');
 			});
 
+			describe('when `lookupContext` is not defined', () => {
+
+				beforeEach(async () => {
+					linkTransform.mockClear();
+					instance.options.linkLookup.mockClear();
+					resolvedValue = await instance.render('mock-input', linkTransform);
+				});
+
+				it('looks up each of the links with a default lookup context', () => {
+					expect(instance.options.linkLookup).toHaveBeenCalledTimes(2);
+					expect(instance.options.linkLookup).toHaveBeenCalledWith(tokens[0], {});
+					expect(instance.options.linkLookup).toHaveBeenCalledWith(tokens[2], {});
+				});
+
+			});
+
 			describe('when one of the looked up links has an `override` property', () => {
 
 				beforeEach(async () => {
@@ -353,7 +373,7 @@ describe('lib/link-parser', () => {
 							mockLinkLookupResult: 2,
 							override: 'mock-override'
 						});
-					resolvedValue = await instance.render('mock-input', linkTransform);
+					resolvedValue = await instance.render('mock-input', linkTransform, lookupContext);
 				});
 
 				it('transforms only the looked up values which do not have overrides', () => {
@@ -382,7 +402,7 @@ describe('lib/link-parser', () => {
 							mockLinkLookupResult: 1
 						})
 						.mockRejectedValueOnce(linkLookupError);
-					resolvedValue = await instance.render('mock-input', linkTransform);
+					resolvedValue = await instance.render('mock-input', linkTransform, lookupContext);
 				});
 
 				it('transforms only the looked up values which do not error', () => {
@@ -405,18 +425,23 @@ describe('lib/link-parser', () => {
 
 		});
 
-		describe('.toHTML(input)', () => {
+		describe('.toHTML(input, lookupContext)', () => {
+			let lookupContext;
 			let resolvedValue;
 
 			beforeEach(async () => {
+				lookupContext = {
+					mockLookupContext: true
+				};
 				jest.spyOn(instance, 'render').mockResolvedValue('mock-render');
-				resolvedValue = await instance.toHTML('mock-input');
+				resolvedValue = await instance.toHTML('mock-input', lookupContext);
 			});
 
-			it('calls the `render` method with the input and a function', () => {
+			it('calls the `render` method with the input, a function, and the lookup context', () => {
 				expect(instance.render).toHaveBeenCalledTimes(1);
 				expect(instance.render.mock.calls[0][0]).toStrictEqual('mock-input');
 				expect(instance.render.mock.calls[0][1]).toBeInstanceOf(Function);
+				expect(instance.render.mock.calls[0][2]).toStrictEqual(lookupContext);
 			});
 
 			it('resolves with the result of the render', () => {
