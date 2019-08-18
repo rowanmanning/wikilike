@@ -1,16 +1,18 @@
 'use strict';
 
-const index = require('../../index');
-const LinkParser = require('../../lib/link-parser');
+const assert = require('proclaim');
 
 describe('index', () => {
+	let index;
+	let LinkParser;
 
-	afterEach(() => {
-		jest.clearAllMocks();
+	beforeEach(() => {
+		index = require('../../index');
+		LinkParser = require('../../lib/link-parser');
 	});
 
 	it('aliases `lib/link-parser`', () => {
-		expect(index).toStrictEqual(LinkParser);
+		assert.strictEqual(index, LinkParser);
 	});
 
 });
