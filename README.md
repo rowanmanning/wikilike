@@ -3,8 +3,6 @@
 
 Parse and render wiki-like links.
 
-**:warning: This is pre-release software, use in production at your own risk**
-
 
 ## Table of Contents
 
@@ -12,7 +10,7 @@ Parse and render wiki-like links.
   * [Requirements](#requirements)
   * [Usage](#usage)
     * [Creating a parser](#creating-a-parser)
-	* [Link lookups](#link-lookups)
+    * [Link lookups](#link-lookups)
     * [Examples](#examples)
   * [Contributing](#contributing)
   * [License](#license)
@@ -140,12 +138,7 @@ We provide a few example implementations which demonstrate different features:
 
 ## Contributing
 
-To contribute to this library, clone this repo locally and commit your code on a separate branch. Please write unit tests for your code, and run the linter before opening a pull-request:
-
-```sh
-make test    # run all tests
-make verify  # run all linters
-```
+[The contributing guide is available here](docs/contributing.md). All contributors must follow [this library's code of conduct](docs/code_of_conduct.md).
 
 
 ## License

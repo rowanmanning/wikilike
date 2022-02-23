@@ -1,0 +1,12 @@
+{
+	"extends": [
+		"@rowanmanning/eslint-config"
+	],
+	"rules": {
+		"class-methods-use-this": "off",
+		"complexity": "off",
+		"max-depth": "off",
+		"max-statements": "off",
+		"no-lonely-if": "off"
+	}
+}

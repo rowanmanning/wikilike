@@ -15,23 +15,37 @@
   "bugs": "https://github.com/rowanmanning/wikilike/issues",
   "license": "MIT",
   "engines": {
-    "node": ">=10"
+    "node": ">=10",
+    "npm": ">=7"
+  },
+  "scripts": {
+    "test": "npm run test:coverage",
+    "verify": "eslint .",
+    "test:unit": "mocha 'test/unit/**/*.test.js'",
+    "test:coverage": "nyc npm run test:unit",
+    "project:verify": "npx --yes @rowanmanning/validate-project --type git node-library",
+    "project:fix": "npx --yes @rowanmanning/validate-project --type git node-library --fix"
   },
   "dependencies": {
-    "hyperons": "^1.0.0-beta.2"
+    "hyperons": "^1.0.0"
   },
   "devDependencies": {
-    "@rowanmanning/eslint-config": "^2.1.0",
-    "@rowanmanning/make": "^2.0.0",
-    "eslint": "^6.8.0",
-    "mocha": "^7.1.0",
-    "mockery": "^2.1.0",
-    "nyc": "^15.0.0",
-    "proclaim": "^3.6.0",
-    "sinon": "^9.0.1"
+    "@rowanmanning/eslint-config": "^3.2.1",
+    "chai": "^4.3.6",
+    "eslint": "^8.9.0",
+    "mocha": "^9.2.1",
+    "nyc": "^15.1.0",
+    "testdouble": "^3.16.4"
   },
-  "main": "./lib/index.js",
-  "scripts": {
-    "test": "make ci"
+  "main": "lib/link-parser.js",
+  "nyc": {
+    "eager": true,
+    "reporter": [
+      "html",
+      "text"
+    ]
+  },
+  "mocha": {
+    "timeout": 10000
   }
 }
