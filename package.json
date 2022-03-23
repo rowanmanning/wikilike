@@ -15,7 +15,7 @@
   "bugs": "https://github.com/rowanmanning/wikilike/issues",
   "license": "MIT",
   "engines": {
-    "node": ">=10",
+    "node": ">=14",
     "npm": ">=7"
   },
   "scripts": {
