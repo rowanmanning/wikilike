@@ -27,7 +27,7 @@
     "project:fix": "npx --yes @rowanmanning/validate-project --type git node-library --fix"
   },
   "dependencies": {
-    "hyperons": "^1.0.0"
+    "hyperons": "^2.0.0"
   },
   "devDependencies": {
     "@rowanmanning/eslint-config": "^3.2.1",
