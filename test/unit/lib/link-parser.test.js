@@ -533,7 +533,7 @@ describe('lib/link-parser', () => {
 
 		});
 
-		describe.skip('when all of the customisation options are set', () => {
+		describe('when all of the customisation options are set', () => {
 
 			beforeEach(() => {
 				instance.options.openCharacter = '{';
