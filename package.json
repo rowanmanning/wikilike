@@ -24,15 +24,19 @@
     "test:unit": "mocha 'test/unit/**/*.test.js'",
     "test:coverage": "nyc npm run test:unit",
     "project:verify": "npx --yes @rowanmanning/validate-project --type git node-library",
-    "project:fix": "npx --yes @rowanmanning/validate-project --type git node-library --fix"
+    "project:fix": "npx --yes @rowanmanning/validate-project --type git node-library --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "hyperons": "^2.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@rowanmanning/eslint-config": "^3.2.1",
     "chai": "^4.3.6",
     "eslint": "^8.9.0",
+    "husky": "^7.0.4",
     "mocha": "^9.2.1",
     "nyc": "^15.1.0",
     "testdouble": "^3.16.4"
