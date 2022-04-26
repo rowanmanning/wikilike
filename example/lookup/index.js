@@ -1,7 +1,6 @@
 'use strict';
 
-const {promisify} = require('util');
-const readFile = promisify(require('fs').readFile);
+const {readFile} = require('fs/promises');
 
 // Note: in your own code you can replace this require with `@rowanmanning/wikilike`
 const LinkParser = require('../..');
