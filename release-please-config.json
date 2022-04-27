@@ -1,0 +1,6 @@
+{
+	"changelog-type": "github",
+	"prerelease": true,
+	"bump-minor-pre-major": true,
+	"bump-patch-for-minor-pre-major": true
+}
