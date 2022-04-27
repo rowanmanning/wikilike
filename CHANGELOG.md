@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.1.3](https://github.com/rowanmanning/wikilike/compare/v2.1.2...v2.1.3) (2022-04-27)
+
+
+### Bug Fixes
+
+* add new config files to npmignore ([04bf574](https://github.com/rowanmanning/wikilike/commit/04bf574f92b7e89ea09e3a2242c646578d85aa3c))
+* define commit message config for dependabot ([9912986](https://github.com/rowanmanning/wikilike/commit/9912986b30303024fc8123276343bd1ee5e53d38))
+
 ### [2.1.2](https://github.com/rowanmanning/wikilike/compare/v2.1.1...v2.1.2) (2022-04-27)
 
 
