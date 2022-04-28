@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.4](https://github.com/rowanmanning/wikilike/compare/v2.1.3...v2.1.4) (2022-04-28)
+
+
+### Bug Fixes
+
+* correct dependabot commit config ([7f61de6](https://github.com/rowanmanning/wikilike/commit/7f61de6f984dc7575912cd7063a57da4e443a0df))
+
 ### [2.1.3](https://github.com/rowanmanning/wikilike/compare/v2.1.2...v2.1.3) (2022-04-27)
 
 
