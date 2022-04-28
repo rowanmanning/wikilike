@@ -8,4 +8,4 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "fix:"
-      prefix-development: "patch:"
+      prefix-development: "chore:"
