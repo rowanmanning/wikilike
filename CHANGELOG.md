@@ -1,5 +1,24 @@
 # Changelog
 
+### [2.1.5](https://github.com/rowanmanning/wikilike/compare/v2.1.4...v2.1.5) (2022-05-25)
+
+
+### Documentation Changes
+
+* manually define changelog sections ([a199e1e](https://github.com/rowanmanning/wikilike/commit/a199e1e752cf53fa9fd4cab18cdb68609b92e272))
+
+
+### Miscellaneous
+
+* bump @commitlint/cli from 16.2.4 to 17.0.0 ([8a3504e](https://github.com/rowanmanning/wikilike/commit/8a3504e37e7d9210d65d708da75ca6a22acd0c30))
+* bump @commitlint/cli from 17.0.0 to 17.0.1 ([d7118b4](https://github.com/rowanmanning/wikilike/commit/d7118b461b18b32397a66287ec57fdb8345f4b7d))
+* bump @commitlint/config-conventional from 16.2.4 to 17.0.0 ([67742ae](https://github.com/rowanmanning/wikilike/commit/67742ae3bf30d918e139791e30fb34acab6af634))
+* bump @rowanmanning/eslint-config from 3.4.0 to 3.5.0 ([27ee9fb](https://github.com/rowanmanning/wikilike/commit/27ee9fb419fa352a5a9a04eff0ce27a0f5d87005))
+* bump eslint from 8.14.0 to 8.15.0 ([028d2f8](https://github.com/rowanmanning/wikilike/commit/028d2f812029d5c379fc83da2456d39cda99a6d3))
+* bump eslint from 8.15.0 to 8.16.0 ([2636803](https://github.com/rowanmanning/wikilike/commit/2636803db1731c5d6e440b08a16277e01132e529))
+* bump husky from 7.0.4 to 8.0.1 ([6ae89e6](https://github.com/rowanmanning/wikilike/commit/6ae89e6e774e5889cc371f56e3f14807547799bf))
+* bump mocha from 9.2.2 to 10.0.0 ([c906fa4](https://github.com/rowanmanning/wikilike/commit/c906fa41a003d18a0a1c72ebff6a7073b9ea294d))
+
 ### [2.1.4](https://github.com/rowanmanning/wikilike/compare/v2.1.3...v2.1.4) (2022-04-28)
 
 
