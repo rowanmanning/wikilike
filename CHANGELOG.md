@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/rowanmanning/wikilike/compare/v2.2.0...v2.2.1) (2022-07-09)
+
+
+### Bug Fixes
+
+* hide the misc changelog section ([5d710d1](https://github.com/rowanmanning/wikilike/commit/5d710d1a8c1d1838e143123e54fb1c4f48e4d0f3))
+
 ## [2.2.0](https://github.com/rowanmanning/wikilike/compare/v2.1.5...v2.2.0) (2022-06-10)
 
 
