@@ -15,8 +15,8 @@
   "bugs": "https://github.com/rowanmanning/wikilike/issues",
   "license": "MIT",
   "engines": {
-    "node": ">=14",
-    "npm": ">=7"
+    "node": "14.x || 16.x || 18.x",
+    "npm": "7.x || 8.x"
   },
   "scripts": {
     "test": "npm run test:coverage",
