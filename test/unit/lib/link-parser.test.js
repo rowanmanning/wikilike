@@ -700,4 +700,10 @@ describe('lib/link-parser', () => {
 
 	});
 
+	describe('.default', () => {
+		it('aliases the module exports', () => {
+			assert.strictEqual(LinkParser, LinkParser.default);
+		});
+	});
+
 });
