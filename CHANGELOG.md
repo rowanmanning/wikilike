@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.2](https://github.com/rowanmanning/wikilike/compare/v2.2.1...v2.2.2) (2022-11-14)
+
+
+### Bug Fixes
+
+* improve TypeScript compatibility ([57ae2ef](https://github.com/rowanmanning/wikilike/commit/57ae2efb6198f19155a62a668eab96c2dbec0488))
+
 ## [2.2.1](https://github.com/rowanmanning/wikilike/compare/v2.2.0...v2.2.1) (2022-07-09)
 
 
