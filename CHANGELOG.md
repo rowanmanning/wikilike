@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.3](https://github.com/rowanmanning/wikilike/compare/v2.2.2...v2.2.3) (2023-01-07)
+
+
+### Bug Fixes
+
+* bump json5 from 2.2.1 to 2.2.3 ([89c11ee](https://github.com/rowanmanning/wikilike/commit/89c11eeed7f0caae4ad69f83d3ba8078314dc3cb))
+
 ## [2.2.2](https://github.com/rowanmanning/wikilike/compare/v2.2.1...v2.2.2) (2022-11-14)
 
 
