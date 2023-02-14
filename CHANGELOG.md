@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.4](https://github.com/rowanmanning/wikilike/compare/v2.2.3...v2.2.4) (2023-02-14)
+
+
+### Bug Fixes
+
+* support npm v9 ([57b4b0e](https://github.com/rowanmanning/wikilike/commit/57b4b0e1747b5e0905a49aa642ada120f5ea196b))
+
 ## [2.2.3](https://github.com/rowanmanning/wikilike/compare/v2.2.2...v2.2.3) (2023-01-07)
 
 
