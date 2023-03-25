@@ -1,6 +1,6 @@
 {
   "name": "@rowanmanning/wikilike",
-  "version": "2.2.4",
+  "version": "3.0.0",
   "description": "Parse and render wiki-like links",
   "keywords": [
     "wiki",

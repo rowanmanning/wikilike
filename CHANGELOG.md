@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.0](https://github.com/rowanmanning/wikilike/compare/v2.2.4...v3.0.0) (2023-03-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop official support for npm v7
+* drop support for Node.js 14
+
+### Miscellaneous
+
+* drop official support for npm v7 ([d469cb8](https://github.com/rowanmanning/wikilike/commit/d469cb8c8b1013cd82c3b2f74ef3ac21a7e6b41d))
+* drop support for Node.js 14 ([25d5baf](https://github.com/rowanmanning/wikilike/commit/25d5baf6a06c12a57c8a2f590e59ea79c72abbab))
+
 ## [2.2.4](https://github.com/rowanmanning/wikilike/compare/v2.2.3...v2.2.4) (2023-02-14)
 
 
