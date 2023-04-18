@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/rowanmanning/wikilike/compare/v3.0.0...v3.0.1) (2023-04-18)
+
+
+### Bug Fixes
+
+* add support for Node.js 20 ([909e67f](https://github.com/rowanmanning/wikilike/commit/909e67ffd64ea3cb148fcc4eef89c54a82e70aaf))
+
 ## [3.0.0](https://github.com/rowanmanning/wikilike/compare/v2.2.4...v3.0.0) (2023-03-25)
 
 
