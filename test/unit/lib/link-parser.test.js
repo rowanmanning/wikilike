@@ -1,6 +1,6 @@
 'use strict';
 
-const {assert} = require('chai');
+const assert = require('node:assert');
 const td = require('testdouble');
 
 describe('lib/link-parser', () => {
@@ -603,8 +603,7 @@ describe('lib/link-parser', () => {
 	describe('.defaultOptions', () => {
 
 		it('is an object', () => {
-			assert.isNotNull(LinkParser.defaultOptions);
-			assert.isObject(LinkParser.defaultOptions);
+			assert.strictEqual(typeof LinkParser.defaultOptions, 'object');
 		});
 
 		describe('.closeCharacter', () => {
@@ -667,7 +666,7 @@ describe('lib/link-parser', () => {
 
 			it('is a function which returns its first argument', () => {
 				const linkLookup = LinkParser.defaultOptions.linkLookup;
-				assert.isFunction(linkLookup);
+				assert.strictEqual(typeof linkLookup, 'function');
 				assert.strictEqual(linkLookup('mock'), 'mock');
 			});
 
