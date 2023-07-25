@@ -3,40 +3,9 @@
 ## 3.0.2 (2023-07-25)
 
 
-### ⚠ BREAKING CHANGES
-
-* drop official support for npm v7
-* drop support for Node.js 14
-
-### Features
-
-* ensure typescript types are always valid ([259da36](https://github.com/rowanmanning/wikilike/commit/259da365d1697c6f1bbae39e05ce3bafe7eac952))
-
-
 ### Bug Fixes
 
-* add new config files to npmignore ([04bf574](https://github.com/rowanmanning/wikilike/commit/04bf574f92b7e89ea09e3a2242c646578d85aa3c))
-* add support for Node.js 20 ([909e67f](https://github.com/rowanmanning/wikilike/commit/909e67ffd64ea3cb148fcc4eef89c54a82e70aaf))
-* bump json5 from 2.2.1 to 2.2.3 ([89c11ee](https://github.com/rowanmanning/wikilike/commit/89c11eeed7f0caae4ad69f83d3ba8078314dc3cb))
-* correct dependabot commit config ([7f61de6](https://github.com/rowanmanning/wikilike/commit/7f61de6f984dc7575912cd7063a57da4e443a0df))
-* define commit message config for dependabot ([9912986](https://github.com/rowanmanning/wikilike/commit/9912986b30303024fc8123276343bd1ee5e53d38))
-* hide the misc changelog section ([5d710d1](https://github.com/rowanmanning/wikilike/commit/5d710d1a8c1d1838e143123e54fb1c4f48e4d0f3))
-* improve TypeScript compatibility ([57ae2ef](https://github.com/rowanmanning/wikilike/commit/57ae2efb6198f19155a62a668eab96c2dbec0488))
-* run npm ci before npm publishing ([f2d549c](https://github.com/rowanmanning/wikilike/commit/f2d549c1ee0c6d5389300d56b41425f296abc7c5))
-* sort out broken releases ([3ada16e](https://github.com/rowanmanning/wikilike/commit/3ada16e5ce5b84ba8463fde43853729ddeaa627d))
-* support npm v9 ([57b4b0e](https://github.com/rowanmanning/wikilike/commit/57b4b0e1747b5e0905a49aa642ada120f5ea196b))
-* update examples to use the fs/promises API ([043c6ff](https://github.com/rowanmanning/wikilike/commit/043c6ff195bdadcadd96ae2f317cae00d79fb7c4))
-
-
-### Documentation Changes
-
-* manually define changelog sections ([a199e1e](https://github.com/rowanmanning/wikilike/commit/a199e1e752cf53fa9fd4cab18cdb68609b92e272))
-
-
-### Miscellaneous
-
-* drop official support for npm v7 ([d469cb8](https://github.com/rowanmanning/wikilike/commit/d469cb8c8b1013cd82c3b2f74ef3ac21a7e6b41d))
-* drop support for Node.js 14 ([25d5baf](https://github.com/rowanmanning/wikilike/commit/25d5baf6a06c12a57c8a2f590e59ea79c72abbab))
+* sort out broken releases
 
 ## [3.0.1](https://github.com/rowanmanning/wikilike/compare/v3.0.0...v3.0.1) (2023-04-18)
 
