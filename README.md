@@ -48,7 +48,7 @@ _Note: it's up to your lookup function to execute commands. See [link lookups](#
 
 This library requires the following to run:
 
-  * [Node.js](https://nodejs.org/) 16+
+  * [Node.js](https://nodejs.org/) 18+
 
 
 ## Usage
