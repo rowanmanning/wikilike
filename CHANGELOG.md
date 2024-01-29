@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/rowanmanning/wikilike/compare/v4.0.0...v4.1.0) (2024-01-29)
+
+
+### Features
+
+* add official support for npm 10 ([c78290f](https://github.com/rowanmanning/wikilike/commit/c78290febeaefb5f318b88ff03e3952aaae7e797))
+
 ## [4.0.0](https://github.com/rowanmanning/wikilike/compare/v3.0.2...v4.0.0) (2023-09-11)
 
 
