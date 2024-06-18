@@ -22,31 +22,27 @@ describe('lib/link-parser', () => {
 		let userOptions;
 
 		beforeEach(() => {
-			defaultedOptions = Object.assign({}, LinkParser.defaultOptions, {log});
-			userOptions = {mockUserOptions: true};
+			defaultedOptions = Object.assign({}, LinkParser.defaultOptions, { log });
+			userOptions = { mockUserOptions: true };
 			LinkParser.applyDefaultOptions = td.func();
 			td.when(LinkParser.applyDefaultOptions(userOptions)).thenReturn(defaultedOptions);
 			instance = new LinkParser(userOptions);
 		});
 
 		it('calls `LinkParser.applyDefaultOptions` with `options`', () => {
-			td.verify(LinkParser.applyDefaultOptions(userOptions), {times: 1});
+			td.verify(LinkParser.applyDefaultOptions(userOptions), { times: 1 });
 		});
 
 		describe('.options', () => {
-
 			it('is set to the defaulted options', () => {
 				assert.strictEqual(instance.options, defaultedOptions);
 			});
-
 		});
 
 		describe('.log', () => {
-
 			it('is set to the defaulted `log` option', () => {
 				assert.strictEqual(instance.log, defaultedOptions.log);
 			});
-
 		});
 
 		describe('.parse(input)', () => {
@@ -317,7 +313,6 @@ describe('lib/link-parser', () => {
 
 			for (const testCase of testCases) {
 				describe(`for input "${testCase.name}"`, () => {
-
 					beforeEach(() => {
 						returnValue = instance.parse(testCase.input);
 					});
@@ -325,10 +320,8 @@ describe('lib/link-parser', () => {
 					it('returns the expected tokens', () => {
 						assert.strictEqual(JSON.stringify(returnValue), testCase.expectedResult);
 					});
-
 				});
 			}
-
 		});
 
 		describe('.render(input, linkTransform, lookupContext)', () => {
@@ -358,74 +351,99 @@ describe('lib/link-parser', () => {
 				instance.parse = td.func();
 				td.when(instance.parse('mock-input')).thenReturn(tokens);
 				linkTransform = td.func();
-				td.when(linkTransform({mockLinkLookupResult: 1})).thenReturn('mock-link-transform-1');
-				td.when(linkTransform({mockLinkLookupResult: 2})).thenReturn('mock-link-transform-2');
+				td.when(linkTransform({ mockLinkLookupResult: 1 })).thenReturn(
+					'mock-link-transform-1'
+				);
+				td.when(linkTransform({ mockLinkLookupResult: 2 })).thenReturn(
+					'mock-link-transform-2'
+				);
 				instance.options.linkLookup = td.func();
-				td.when(instance.options.linkLookup(tokens[0], lookupContext)).thenResolve({mockLinkLookupResult: 1});
-				td.when(instance.options.linkLookup(tokens[2], lookupContext)).thenResolve({mockLinkLookupResult: 2});
+				td.when(instance.options.linkLookup(tokens[0], lookupContext)).thenResolve({
+					mockLinkLookupResult: 1
+				});
+				td.when(instance.options.linkLookup(tokens[2], lookupContext)).thenResolve({
+					mockLinkLookupResult: 2
+				});
 				resolvedValue = await instance.render('mock-input', linkTransform, lookupContext);
 			});
 
 			it('parses the input', () => {
-				td.verify(instance.parse('mock-input'), {times: 1});
+				td.verify(instance.parse('mock-input'), { times: 1 });
 			});
 
 			it('looks up each of the links', () => {
-				td.verify(instance.options.linkLookup(tokens[0], lookupContext), {times: 1});
-				td.verify(instance.options.linkLookup(tokens[2], lookupContext), {times: 1});
+				td.verify(instance.options.linkLookup(tokens[0], lookupContext), { times: 1 });
+				td.verify(instance.options.linkLookup(tokens[2], lookupContext), { times: 1 });
 			});
 
 			it('transforms each of the looked up values', () => {
-				td.verify(linkTransform({mockLinkLookupResult: 1}), {times: 1});
-				td.verify(linkTransform({mockLinkLookupResult: 2}), {times: 1});
+				td.verify(linkTransform({ mockLinkLookupResult: 1 }), { times: 1 });
+				td.verify(linkTransform({ mockLinkLookupResult: 2 }), { times: 1 });
 			});
 
 			it('resolves with the input with links rendered using the transform', () => {
-				assert.strictEqual(resolvedValue, 'mock-link-transform-1\nmock-text\nmock-link-transform-2');
+				assert.strictEqual(
+					resolvedValue,
+					'mock-link-transform-1\nmock-text\nmock-link-transform-2'
+				);
 			});
 
 			describe('when `lookupContext` is not defined', () => {
-
 				beforeEach(async () => {
 					instance.options.linkLookup = td.func();
-					td.when(instance.options.linkLookup(tokens[0], {})).thenResolve({mockLinkLookupResult: 1});
-					td.when(instance.options.linkLookup(tokens[2], {})).thenResolve({mockLinkLookupResult: 2});
+					td.when(instance.options.linkLookup(tokens[0], {})).thenResolve({
+						mockLinkLookupResult: 1
+					});
+					td.when(instance.options.linkLookup(tokens[2], {})).thenResolve({
+						mockLinkLookupResult: 2
+					});
 					resolvedValue = await instance.render('mock-input', linkTransform);
 				});
 
 				it('looks up each of the links with a default lookup context', () => {
-					td.verify(instance.options.linkLookup(tokens[0], {}), {times: 1});
-					td.verify(instance.options.linkLookup(tokens[2], {}), {times: 1});
+					td.verify(instance.options.linkLookup(tokens[0], {}), { times: 1 });
+					td.verify(instance.options.linkLookup(tokens[2], {}), { times: 1 });
 				});
-
 			});
 
 			describe('when one of the looked up links has an `override` property', () => {
-
 				beforeEach(async () => {
 					linkTransform = td.func();
-					td.when(linkTransform({mockLinkLookupResult: 1})).thenReturn('mock-link-transform-1');
+					td.when(linkTransform({ mockLinkLookupResult: 1 })).thenReturn(
+						'mock-link-transform-1'
+					);
 					instance.options.linkLookup = td.func();
-					td.when(instance.options.linkLookup(tokens[0], lookupContext)).thenResolve({mockLinkLookupResult: 1});
+					td.when(instance.options.linkLookup(tokens[0], lookupContext)).thenResolve({
+						mockLinkLookupResult: 1
+					});
 					td.when(instance.options.linkLookup(tokens[2], lookupContext)).thenResolve({
 						mockLinkLookupResult: 2,
 						override: 'mock-override'
 					});
-					resolvedValue = await instance.render('mock-input', linkTransform, lookupContext);
+					resolvedValue = await instance.render(
+						'mock-input',
+						linkTransform,
+						lookupContext
+					);
 				});
 
 				it('transforms only the looked up values which do not have overrides', () => {
-					td.verify(linkTransform({mockLinkLookupResult: 1}), {times: 1});
-					td.verify(linkTransform({
-						mockLinkLookupResult: 2,
-						override: 'mock-override'
-					}), {times: 0});
+					td.verify(linkTransform({ mockLinkLookupResult: 1 }), { times: 1 });
+					td.verify(
+						linkTransform({
+							mockLinkLookupResult: 2,
+							override: 'mock-override'
+						}),
+						{ times: 0 }
+					);
 				});
 
 				it('resolves with the input with links rendered using the transform', () => {
-					assert.strictEqual(resolvedValue, 'mock-link-transform-1\nmock-text\nmock-override');
+					assert.strictEqual(
+						resolvedValue,
+						'mock-link-transform-1\nmock-text\nmock-override'
+					);
 				});
-
 			});
 
 			describe('when one of the link lookup errors', () => {
@@ -434,29 +452,43 @@ describe('lib/link-parser', () => {
 				beforeEach(async () => {
 					instance.log.error = td.func();
 					linkTransform = td.func();
-					td.when(linkTransform({mockLinkLookupResult: 1})).thenReturn('mock-link-transform-1');
+					td.when(linkTransform({ mockLinkLookupResult: 1 })).thenReturn(
+						'mock-link-transform-1'
+					);
 					linkLookupError = new Error('mock link lookup error');
 					instance.options.linkLookup = td.func();
-					td.when(instance.options.linkLookup(tokens[0], lookupContext)).thenReturn({mockLinkLookupResult: 1});
-					td.when(instance.options.linkLookup(tokens[2], lookupContext)).thenReject(linkLookupError);
-					resolvedValue = await instance.render('mock-input', linkTransform, lookupContext);
+					td.when(instance.options.linkLookup(tokens[0], lookupContext)).thenReturn({
+						mockLinkLookupResult: 1
+					});
+					td.when(instance.options.linkLookup(tokens[2], lookupContext)).thenReject(
+						linkLookupError
+					);
+					resolvedValue = await instance.render(
+						'mock-input',
+						linkTransform,
+						lookupContext
+					);
 				});
 
 				it('transforms only the looked up values which do not error', () => {
-					td.verify(linkTransform({mockLinkLookupResult: 1}), {times: 1});
-					td.verify(linkTransform({mockLinkLookupResult: 2}), {times: 0});
+					td.verify(linkTransform({ mockLinkLookupResult: 1 }), { times: 1 });
+					td.verify(linkTransform({ mockLinkLookupResult: 2 }), { times: 0 });
 				});
 
 				it('logs the error', () => {
-					td.verify(instance.log.error(`Error processing link "mock-link-2":`, linkLookupError), {times: 1});
+					td.verify(
+						instance.log.error(`Error processing link "mock-link-2":`, linkLookupError),
+						{ times: 1 }
+					);
 				});
 
 				it('resolves with the input with links rendered using the transform', () => {
-					assert.strictEqual(resolvedValue, 'mock-link-transform-1\nmock-text\nmock-link-2');
+					assert.strictEqual(
+						resolvedValue,
+						'mock-link-transform-1\nmock-text\nmock-link-2'
+					);
 				});
-
 			});
-
 		});
 
 		describe('.toHTML(input, lookupContext)', () => {
@@ -467,15 +499,23 @@ describe('lib/link-parser', () => {
 				lookupContext = {
 					mockLookupContext: true
 				};
-				td.when(Hyperons.createElement(), {ignoreExtraArgs: true}).thenReturn('mock element');
-				td.when(Hyperons.renderToString('mock element')).thenReturn('mock rendered template');
+				td.when(Hyperons.createElement(), { ignoreExtraArgs: true }).thenReturn(
+					'mock element'
+				);
+				td.when(Hyperons.renderToString('mock element')).thenReturn(
+					'mock rendered template'
+				);
 				instance.render = td.func();
-				td.when(instance.render('mock-input', td.matchers.isA(Function), lookupContext)).thenResolve('mock-render');
+				td.when(
+					instance.render('mock-input', td.matchers.isA(Function), lookupContext)
+				).thenResolve('mock-render');
 				resolvedValue = await instance.toHTML('mock-input', lookupContext);
 			});
 
 			it('calls the `render` method with the input, a function, and the lookup context', () => {
-				td.verify(instance.render('mock-input', td.matchers.isA(Function), lookupContext), {times: 1});
+				td.verify(instance.render('mock-input', td.matchers.isA(Function), lookupContext), {
+					times: 1
+				});
 			});
 
 			it('resolves with the result of the render', () => {
@@ -499,14 +539,21 @@ describe('lib/link-parser', () => {
 				});
 
 				it('calls `Hyperons.createElement` with information to construct an `a` element', () => {
-					td.verify(Hyperons.createElement('a', {
-						href: 'mock-location',
-						extra: 'mock-extra'
-					}, 'mock-label'), {times: 1});
+					td.verify(
+						Hyperons.createElement(
+							'a',
+							{
+								href: 'mock-location',
+								extra: 'mock-extra'
+							},
+							'mock-label'
+						),
+						{ times: 1 }
+					);
 				});
 
 				it('calls `Hyperons.renderToString` with the created element', () => {
-					td.verify(Hyperons.renderToString('mock element'), {times: 1});
+					td.verify(Hyperons.renderToString('mock element'), { times: 1 });
 				});
 
 				it('returns the rendered string', () => {
@@ -514,27 +561,29 @@ describe('lib/link-parser', () => {
 				});
 
 				describe('when the passed in `link` does not have a label', () => {
-
 					beforeEach(() => {
 						delete link.label;
 						returnValue = td.explain(instance.render).calls[0].args[1](link);
 					});
 
 					it('calls `Hyperons.createElement` with the location in place of a label', () => {
-						td.verify(Hyperons.createElement('a', {
-							href: 'mock-location',
-							extra: 'mock-extra'
-						}, 'mock-location'), {times: 1});
+						td.verify(
+							Hyperons.createElement(
+								'a',
+								{
+									href: 'mock-location',
+									extra: 'mock-extra'
+								},
+								'mock-location'
+							),
+							{ times: 1 }
+						);
 					});
-
 				});
-
 			});
-
 		});
 
 		describe('when all of the customisation options are set', () => {
-
 			beforeEach(() => {
 				instance.options.openCharacter = '{';
 				instance.options.closeCharacter = '}';
@@ -582,96 +631,76 @@ describe('lib/link-parser', () => {
 
 				for (const testCase of testCases) {
 					describe(`for input "${testCase.name}"`, () => {
-
 						beforeEach(() => {
 							returnValue = instance.parse(testCase.input);
 						});
 
 						it('returns the expected tokens', () => {
-							assert.strictEqual(JSON.stringify(returnValue), testCase.expectedResult);
+							assert.strictEqual(
+								JSON.stringify(returnValue),
+								testCase.expectedResult
+							);
 						});
-
 					});
 				}
-
 			});
-
 		});
-
 	});
 
 	describe('.defaultOptions', () => {
-
 		it('is an object', () => {
 			assert.strictEqual(typeof LinkParser.defaultOptions, 'object');
 		});
 
 		describe('.closeCharacter', () => {
-
 			it('is set to the expected string value', () => {
 				assert.strictEqual(LinkParser.defaultOptions.closeCharacter, ']');
 			});
-
 		});
 
 		describe('.commandCharacter', () => {
-
 			it('is set to the expected string value', () => {
 				assert.strictEqual(LinkParser.defaultOptions.commandCharacter, '>');
 			});
-
 		});
 
 		describe('.defaultCommand', () => {
-
 			it('is set to the expected string value', () => {
 				assert.strictEqual(LinkParser.defaultOptions.defaultCommand, 'cmd');
 			});
-
 		});
 
 		describe('.dividerCharacter', () => {
-
 			it('is set to the expected string value', () => {
 				assert.strictEqual(LinkParser.defaultOptions.dividerCharacter, '|');
 			});
-
 		});
 
 		describe('.escapeCharacter', () => {
-
 			it('is set to the expected string value', () => {
 				assert.strictEqual(LinkParser.defaultOptions.escapeCharacter, '\\');
 			});
-
 		});
 
 		describe('.openCharacter', () => {
-
 			it('is set to the expected string value', () => {
 				assert.strictEqual(LinkParser.defaultOptions.openCharacter, '[');
 			});
-
 		});
 
 		describe('.log', () => {
-
 			it('is the global `console` object', () => {
 				assert.strictEqual(LinkParser.defaultOptions.log, console);
 			});
-
 		});
 
 		describe('.linkLookup', () => {
-
 			it('is a function which returns its first argument', () => {
 				const linkLookup = LinkParser.defaultOptions.linkLookup;
 				assert.strictEqual(typeof linkLookup, 'function');
 				assert.strictEqual(linkLookup('mock'), 'mock');
 			});
-
 		});
-
 	});
 
 	describe('.applyDefaultOptions(options)', () => {
@@ -680,23 +709,22 @@ describe('lib/link-parser', () => {
 		let userOptions;
 
 		beforeEach(() => {
-			userOptions = {mockUserOptions: true};
+			userOptions = { mockUserOptions: true };
 			defaultedOptions = {
 				mockDefaultedOptions: true
 			};
 			Object.assign = td.func();
-			td.when(Object.assign(), {ignoreExtraArgs: true}).thenReturn(defaultedOptions);
+			td.when(Object.assign(), { ignoreExtraArgs: true }).thenReturn(defaultedOptions);
 			returnValue = LinkParser.applyDefaultOptions(userOptions);
 		});
 
 		it('defaults the `options`', () => {
-			td.verify(Object.assign({}, LinkParser.defaultOptions, userOptions), {times: 1});
+			td.verify(Object.assign({}, LinkParser.defaultOptions, userOptions), { times: 1 });
 		});
 
 		it('returns the defaulted options with some transformations', () => {
 			assert.strictEqual(returnValue, defaultedOptions);
 		});
-
 	});
 
 	describe('.default', () => {
@@ -704,5 +732,4 @@ describe('lib/link-parser', () => {
 			assert.strictEqual(LinkParser, LinkParser.default);
 		});
 	});
-
 });
