@@ -1,6 +1,6 @@
 'use strict';
 
-const {readFile} = require('fs/promises');
+const { readFile } = require('node:fs/promises');
 
 // Note: in your own code you can replace this require with `@rowanmanning/wikilike`
 const LinkParser = require('../..');
@@ -11,7 +11,6 @@ const parser = new LinkParser();
 // Rendering happens asynchronously, so for this example we
 // wrap calls in an immediately executed function
 (async () => {
-
 	// Load the input from a file
 	const input = await readFile(`${__dirname}/input.txt`, 'utf-8');
 
@@ -22,5 +21,4 @@ const parser = new LinkParser();
 	console.log(`\nINPUT:\n${input}`);
 	console.log('----------');
 	console.log(`\nOUTPUT:\n${output}`);
-
 })();
