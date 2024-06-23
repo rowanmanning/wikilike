@@ -1,7 +1,10 @@
 'use strict';
 
+const { afterEach, beforeEach, describe, it } = require('node:test');
 const assert = require('node:assert');
 const td = require('testdouble');
+
+td.config({ ignoreWarnings: true });
 
 describe('lib/link-parser', () => {
 	let Hyperons;
@@ -15,6 +18,8 @@ describe('lib/link-parser', () => {
 		};
 		LinkParser = require('../../../lib/link-parser');
 	});
+
+	afterEach(() => td.reset());
 
 	describe('new LinkParser(options)', () => {
 		let defaultedOptions;
