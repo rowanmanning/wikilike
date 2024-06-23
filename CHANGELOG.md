@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/rowanmanning/wikilike/compare/v4.1.0...v4.2.0) (2024-06-23)
+
+
+### Features
+
+* add Node.js 22 support ([04be7e6](https://github.com/rowanmanning/wikilike/commit/04be7e6c9285ec8335a691daf7a7ac6c0535a082))
+
 ## [4.1.0](https://github.com/rowanmanning/wikilike/compare/v4.0.0...v4.1.0) (2024-01-30)
 
 
