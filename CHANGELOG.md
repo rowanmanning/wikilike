@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.1](https://github.com/rowanmanning/wikilike/compare/v4.2.0...v4.2.1) (2024-07-27)
+
+
+### Bug Fixes
+
+* prevent husky from failing ([55de1ea](https://github.com/rowanmanning/wikilike/commit/55de1ea9ea1d1ce7d5711b730da4ba4ba84aa838))
+
 ## [4.2.0](https://github.com/rowanmanning/wikilike/compare/v4.1.0...v4.2.0) (2024-06-23)
 
 
