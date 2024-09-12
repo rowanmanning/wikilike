@@ -9,4 +9,5 @@ biome.json
 coverage
 docs
 example
+jsconfig.json
 test
