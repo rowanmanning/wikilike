@@ -6,7 +6,7 @@
 			"include": ["example/**/*"],
 			"linter": {
 				"rules": {
-					"nursery": {
+					"suspicious": {
 						"noConsole": "off"
 					}
 				}
