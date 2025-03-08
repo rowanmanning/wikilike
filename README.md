@@ -61,7 +61,7 @@ npm install @rowanmanning/wikilike
 Load the library into your code with a `require` call:
 
 ```js
-const LinkParser = require('@rowanmanning/wikilike');
+const { LinkParser } = require('@rowanmanning/wikilike');
 ```
 
 ### Creating a parser

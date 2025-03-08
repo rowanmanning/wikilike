@@ -3,7 +3,7 @@
 const { readFile } = require('node:fs/promises');
 
 // Note: in your own code you can replace this require with `@rowanmanning/wikilike`
-const LinkParser = require('../..');
+const { LinkParser } = require('../..');
 
 // Create a parser
 const parser = new LinkParser();

@@ -16,7 +16,7 @@ describe('link-parser', () => {
 		log = {
 			error: td.func()
 		};
-		LinkParser = require('../..');
+		LinkParser = require('../..').LinkParser;
 	});
 
 	afterEach(() => td.reset());
@@ -729,12 +729,6 @@ describe('link-parser', () => {
 
 		it('returns the defaulted options with some transformations', () => {
 			assert.strictEqual(returnValue, defaultedOptions);
-		});
-	});
-
-	describe('.default', () => {
-		it('aliases the module exports', () => {
-			assert.strictEqual(LinkParser, LinkParser.default);
 		});
 	});
 });

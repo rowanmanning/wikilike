@@ -313,8 +313,7 @@ LinkParser.defaultOptions = {
 	openCharacter: '['
 };
 
-module.exports = LinkParser;
-module.exports.default = module.exports;
+exports.LinkParser = LinkParser;
 
 /**
  * A link lookup callback function.
