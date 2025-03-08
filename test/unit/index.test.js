@@ -6,7 +6,7 @@ const td = require('testdouble');
 
 td.config({ ignoreWarnings: true });
 
-describe('lib/link-parser', () => {
+describe('link-parser', () => {
 	let Hyperons;
 	let log;
 	let LinkParser;
@@ -16,7 +16,7 @@ describe('lib/link-parser', () => {
 		log = {
 			error: td.func()
 		};
-		LinkParser = require('../../../lib/link-parser');
+		LinkParser = require('../..');
 	});
 
 	afterEach(() => td.reset());
