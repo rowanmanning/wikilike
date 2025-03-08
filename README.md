@@ -3,17 +3,16 @@
 
 Parse and render wiki-like links.
 
-
-## Table of Contents
-
-  * [What's a wiki-like link?](#whats-a-wiki-like-link)
-  * [Requirements](#requirements)
-  * [Usage](#usage)
-    * [Creating a parser](#creating-a-parser)
-    * [Link lookups](#link-lookups)
-    * [Examples](#examples)
-  * [Contributing](#contributing)
-  * [License](#license)
+* [What's a wiki-like link?](#whats-a-wiki-like-link)
+* [Requirements](#requirements)
+* [Usage](#usage)
+  * [Creating a parser](#creating-a-parser)
+  * [Converting links to HTML](#converting-links-to-html)
+  * [Link lookups](#link-lookups)
+  * [Examples](#examples)
+* [Migration](#migration)
+* [Contributing](#contributing)
+* [License](#license)
 
 
 ## What's a wiki-like link?
@@ -134,6 +133,11 @@ We provide a few example implementations which demonstrate different features:
   - **[Lookup](example/lookup)**: an example of a lookup function, used to find link information from static fules. Run `node example/lookup` to output a rendered input to the command line.
 
   - **[Commands](example/commands)**: extending the Lookup example to support an `embed` command, which embeds the content of the linked page. Run `node example/commands` to output a rendered input to the command line.
+
+
+## Migration
+
+A new major version of this project is released if breaking changes are introduced. We maintain a [migration guide](docs/migration.md) to help users migrate between these versions.
 
 
 ## Contributing
