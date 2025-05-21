@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.0](https://github.com/rowanmanning/wikilike/compare/v5.0.0...v5.1.0) (2025-05-21)
+
+
+### Features
+
+* add Node.js 24 support ([9969a6e](https://github.com/rowanmanning/wikilike/commit/9969a6ee2a8257263d93ed4132d6eb4440ffd59a))
+
 ## [5.0.0](https://github.com/rowanmanning/wikilike/compare/v4.2.1...v5.0.0) (2025-03-08)
 
 
