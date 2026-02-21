@@ -47,7 +47,7 @@ _Note: it's up to your lookup function to execute commands. See [link lookups](#
 
 This library requires the following to run:
 
-  * [Node.js](https://nodejs.org/) 20+
+  * [Node.js](https://nodejs.org/) 22+
 
 
 ## Usage
