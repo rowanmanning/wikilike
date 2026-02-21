@@ -1,25 +1,21 @@
 'use strict';
 
-const { afterEach, beforeEach, describe, it } = require('node:test');
+const { afterEach, beforeEach, describe, it, mock } = require('node:test');
 const assert = require('node:assert');
-const td = require('testdouble');
 
-td.config({ ignoreWarnings: true });
+const Hyperons = { createElement: mock.fn(), renderToString: mock.fn() };
+mock.module('hyperons', { namedExports: Hyperons });
 
 describe('link-parser', () => {
-	let Hyperons;
 	let log;
 	let LinkParser;
 
 	beforeEach(() => {
-		Hyperons = td.replace('hyperons');
-		log = {
-			error: td.func()
-		};
+		log = { error: mock.fn() };
 		LinkParser = require('../..').LinkParser;
 	});
 
-	afterEach(() => td.reset());
+	afterEach(() => mock.reset());
 
 	describe('new LinkParser(options)', () => {
 		let defaultedOptions;
@@ -29,13 +25,19 @@ describe('link-parser', () => {
 		beforeEach(() => {
 			defaultedOptions = Object.assign({}, LinkParser.defaultOptions, { log });
 			userOptions = { mockUserOptions: true };
-			LinkParser.applyDefaultOptions = td.func();
-			td.when(LinkParser.applyDefaultOptions(userOptions)).thenReturn(defaultedOptions);
+			mock.method(
+				LinkParser,
+				'applyDefaultOptions',
+				mock.fn(() => defaultedOptions)
+			);
 			instance = new LinkParser(userOptions);
 		});
 
 		it('calls `LinkParser.applyDefaultOptions` with `options`', () => {
-			td.verify(LinkParser.applyDefaultOptions(userOptions), { times: 1 });
+			assert.strictEqual(LinkParser.applyDefaultOptions.mock.callCount(), 1);
+			assert.deepStrictEqual(LinkParser.applyDefaultOptions.mock.calls[0].arguments, [
+				userOptions
+			]);
 		});
 
 		describe('.options', () => {
@@ -353,37 +355,46 @@ describe('link-parser', () => {
 				lookupContext = {
 					mockLookupContext: true
 				};
-				instance.parse = td.func();
-				td.when(instance.parse('mock-input')).thenReturn(tokens);
-				linkTransform = td.func();
-				td.when(linkTransform({ mockLinkLookupResult: 1 })).thenReturn(
-					'mock-link-transform-1'
+				instance.parse = mock.fn(() => tokens);
+				linkTransform = mock.fn(
+					({ mockLinkLookupResult }) => `mock-link-transform-${mockLinkLookupResult}`
 				);
-				td.when(linkTransform({ mockLinkLookupResult: 2 })).thenReturn(
-					'mock-link-transform-2'
-				);
-				instance.options.linkLookup = td.func();
-				td.when(instance.options.linkLookup(tokens[0], lookupContext)).thenResolve({
-					mockLinkLookupResult: 1
-				});
-				td.when(instance.options.linkLookup(tokens[2], lookupContext)).thenResolve({
-					mockLinkLookupResult: 2
+				instance.options.linkLookup = mock.fn(async (token) => {
+					if (token === tokens[0]) {
+						return { mockLinkLookupResult: 1 };
+					}
+					if (token === tokens[2]) {
+						return { mockLinkLookupResult: 2 };
+					}
 				});
 				resolvedValue = await instance.render('mock-input', linkTransform, lookupContext);
 			});
 
 			it('parses the input', () => {
-				td.verify(instance.parse('mock-input'), { times: 1 });
+				assert.strictEqual(instance.parse.mock.callCount(), 1);
+				assert.deepStrictEqual(instance.parse.mock.calls[0].arguments, ['mock-input']);
 			});
 
 			it('looks up each of the links', () => {
-				td.verify(instance.options.linkLookup(tokens[0], lookupContext), { times: 1 });
-				td.verify(instance.options.linkLookup(tokens[2], lookupContext), { times: 1 });
+				assert.strictEqual(instance.options.linkLookup.mock.callCount(), 2);
+				assert.deepStrictEqual(instance.options.linkLookup.mock.calls[0].arguments, [
+					tokens[0],
+					lookupContext
+				]);
+				assert.deepStrictEqual(instance.options.linkLookup.mock.calls[1].arguments, [
+					tokens[2],
+					lookupContext
+				]);
 			});
 
 			it('transforms each of the looked up values', () => {
-				td.verify(linkTransform({ mockLinkLookupResult: 1 }), { times: 1 });
-				td.verify(linkTransform({ mockLinkLookupResult: 2 }), { times: 1 });
+				assert.strictEqual(linkTransform.mock.callCount(), 2);
+				assert.deepStrictEqual(linkTransform.mock.calls[0].arguments, [
+					{ mockLinkLookupResult: 1 }
+				]);
+				assert.deepStrictEqual(linkTransform.mock.calls[1].arguments, [
+					{ mockLinkLookupResult: 2 }
+				]);
 			});
 
 			it('resolves with the input with links rendered using the transform', () => {
@@ -395,35 +406,42 @@ describe('link-parser', () => {
 
 			describe('when `lookupContext` is not defined', () => {
 				beforeEach(async () => {
-					instance.options.linkLookup = td.func();
-					td.when(instance.options.linkLookup(tokens[0], {})).thenResolve({
-						mockLinkLookupResult: 1
-					});
-					td.when(instance.options.linkLookup(tokens[2], {})).thenResolve({
-						mockLinkLookupResult: 2
+					instance.options.linkLookup = mock.fn(async (token) => {
+						if (token === tokens[0]) {
+							return { mockLinkLookupResult: 1 };
+						}
+						if (token === tokens[2]) {
+							return { mockLinkLookupResult: 2 };
+						}
 					});
 					resolvedValue = await instance.render('mock-input', linkTransform);
 				});
 
 				it('looks up each of the links with a default lookup context', () => {
-					td.verify(instance.options.linkLookup(tokens[0], {}), { times: 1 });
-					td.verify(instance.options.linkLookup(tokens[2], {}), { times: 1 });
+					assert.strictEqual(instance.options.linkLookup.mock.callCount(), 2);
+					assert.deepStrictEqual(instance.options.linkLookup.mock.calls[0].arguments, [
+						tokens[0],
+						{}
+					]);
+					assert.deepStrictEqual(instance.options.linkLookup.mock.calls[1].arguments, [
+						tokens[2],
+						{}
+					]);
 				});
 			});
 
 			describe('when one of the looked up links has an `override` property', () => {
 				beforeEach(async () => {
-					linkTransform = td.func();
-					td.when(linkTransform({ mockLinkLookupResult: 1 })).thenReturn(
-						'mock-link-transform-1'
+					linkTransform = mock.fn(
+						({ mockLinkLookupResult }) => `mock-link-transform-${mockLinkLookupResult}`
 					);
-					instance.options.linkLookup = td.func();
-					td.when(instance.options.linkLookup(tokens[0], lookupContext)).thenResolve({
-						mockLinkLookupResult: 1
-					});
-					td.when(instance.options.linkLookup(tokens[2], lookupContext)).thenResolve({
-						mockLinkLookupResult: 2,
-						override: 'mock-override'
+					instance.options.linkLookup = mock.fn(async (token) => {
+						if (token === tokens[0]) {
+							return { mockLinkLookupResult: 1 };
+						}
+						if (token === tokens[2]) {
+							return { mockLinkLookupResult: 2, override: 'mock-override' };
+						}
 					});
 					resolvedValue = await instance.render(
 						'mock-input',
@@ -433,14 +451,10 @@ describe('link-parser', () => {
 				});
 
 				it('transforms only the looked up values which do not have overrides', () => {
-					td.verify(linkTransform({ mockLinkLookupResult: 1 }), { times: 1 });
-					td.verify(
-						linkTransform({
-							mockLinkLookupResult: 2,
-							override: 'mock-override'
-						}),
-						{ times: 0 }
-					);
+					assert.strictEqual(linkTransform.mock.callCount(), 1);
+					assert.deepStrictEqual(linkTransform.mock.calls[0].arguments, [
+						{ mockLinkLookupResult: 1 }
+					]);
 				});
 
 				it('resolves with the input with links rendered using the transform', () => {
@@ -455,19 +469,19 @@ describe('link-parser', () => {
 				let linkLookupError;
 
 				beforeEach(async () => {
-					instance.log.error = td.func();
-					linkTransform = td.func();
-					td.when(linkTransform({ mockLinkLookupResult: 1 })).thenReturn(
-						'mock-link-transform-1'
+					instance.log.error = mock.fn();
+					linkTransform = mock.fn(
+						({ mockLinkLookupResult }) => `mock-link-transform-${mockLinkLookupResult}`
 					);
 					linkLookupError = new Error('mock link lookup error');
-					instance.options.linkLookup = td.func();
-					td.when(instance.options.linkLookup(tokens[0], lookupContext)).thenReturn({
-						mockLinkLookupResult: 1
+					instance.options.linkLookup = mock.fn(async (token) => {
+						if (token === tokens[0]) {
+							return { mockLinkLookupResult: 1 };
+						}
+						if (token === tokens[2]) {
+							throw linkLookupError;
+						}
 					});
-					td.when(instance.options.linkLookup(tokens[2], lookupContext)).thenReject(
-						linkLookupError
-					);
 					resolvedValue = await instance.render(
 						'mock-input',
 						linkTransform,
@@ -476,15 +490,18 @@ describe('link-parser', () => {
 				});
 
 				it('transforms only the looked up values which do not error', () => {
-					td.verify(linkTransform({ mockLinkLookupResult: 1 }), { times: 1 });
-					td.verify(linkTransform({ mockLinkLookupResult: 2 }), { times: 0 });
+					assert.strictEqual(linkTransform.mock.callCount(), 1);
+					assert.deepStrictEqual(linkTransform.mock.calls[0].arguments, [
+						{ mockLinkLookupResult: 1 }
+					]);
 				});
 
 				it('logs the error', () => {
-					td.verify(
-						instance.log.error(`Error processing link "mock-link-2":`, linkLookupError),
-						{ times: 1 }
-					);
+					assert.strictEqual(instance.log.error.mock.callCount(), 1);
+					assert.deepStrictEqual(instance.log.error.mock.calls[0].arguments, [
+						`Error processing link "mock-link-2":`,
+						linkLookupError
+					]);
 				});
 
 				it('resolves with the input with links rendered using the transform', () => {
@@ -504,23 +521,17 @@ describe('link-parser', () => {
 				lookupContext = {
 					mockLookupContext: true
 				};
-				td.when(Hyperons.createElement(), { ignoreExtraArgs: true }).thenReturn(
-					'mock element'
-				);
-				td.when(Hyperons.renderToString('mock element')).thenReturn(
-					'mock rendered template'
-				);
-				instance.render = td.func();
-				td.when(
-					instance.render('mock-input', td.matchers.isA(Function), lookupContext)
-				).thenResolve('mock-render');
+				Hyperons.createElement.mock.mockImplementation(() => 'mock element');
+				Hyperons.renderToString.mock.mockImplementation(() => 'mock rendered template');
+				instance.render = mock.fn(async () => 'mock-render');
 				resolvedValue = await instance.toHTML('mock-input', lookupContext);
 			});
 
 			it('calls the `render` method with the input, a function, and the lookup context', () => {
-				td.verify(instance.render('mock-input', td.matchers.isA(Function), lookupContext), {
-					times: 1
-				});
+				assert.strictEqual(instance.render.mock.callCount(), 1);
+				assert.strictEqual(instance.render.mock.calls[0].arguments[0], 'mock-input');
+				assert.strictEqual(typeof instance.render.mock.calls[0].arguments[1], 'function');
+				assert.deepStrictEqual(instance.render.mock.calls[0].arguments[2], lookupContext);
 			});
 
 			it('resolves with the result of the render', () => {
@@ -540,25 +551,24 @@ describe('link-parser', () => {
 						type: 'mock-type',
 						extra: 'mock-extra'
 					};
-					returnValue = td.explain(instance.render).calls[0].args[1](link);
+					Hyperons.renderToString.mock.resetCalls();
+					returnValue = instance.render.mock.calls[0].arguments[1](link);
 				});
 
 				it('calls `Hyperons.createElement` with information to construct an `a` element', () => {
-					td.verify(
-						Hyperons.createElement(
-							'a',
-							{
-								href: 'mock-location',
-								extra: 'mock-extra'
-							},
-							'mock-label'
-						),
-						{ times: 1 }
-					);
+					assert.strictEqual(Hyperons.createElement.mock.callCount(), 1);
+					assert.deepStrictEqual(Hyperons.createElement.mock.calls[0].arguments, [
+						'a',
+						{ href: 'mock-location', extra: 'mock-extra' },
+						'mock-label'
+					]);
 				});
 
 				it('calls `Hyperons.renderToString` with the created element', () => {
-					td.verify(Hyperons.renderToString('mock element'), { times: 1 });
+					assert.strictEqual(Hyperons.renderToString.mock.callCount(), 1);
+					assert.deepStrictEqual(Hyperons.renderToString.mock.calls[0].arguments, [
+						'mock element'
+					]);
 				});
 
 				it('returns the rendered string', () => {
@@ -568,21 +578,17 @@ describe('link-parser', () => {
 				describe('when the passed in `link` does not have a label', () => {
 					beforeEach(() => {
 						delete link.label;
-						returnValue = td.explain(instance.render).calls[0].args[1](link);
+						Hyperons.createElement.mock.resetCalls();
+						returnValue = instance.render.mock.calls[0].arguments[1](link);
 					});
 
 					it('calls `Hyperons.createElement` with the location in place of a label', () => {
-						td.verify(
-							Hyperons.createElement(
-								'a',
-								{
-									href: 'mock-location',
-									extra: 'mock-extra'
-								},
-								'mock-location'
-							),
-							{ times: 1 }
-						);
+						assert.strictEqual(Hyperons.createElement.mock.callCount(), 1);
+						assert.deepStrictEqual(Hyperons.createElement.mock.calls[0].arguments, [
+							'a',
+							{ href: 'mock-location', extra: 'mock-extra' },
+							'mock-location'
+						]);
 					});
 				});
 			});
@@ -718,13 +724,17 @@ describe('link-parser', () => {
 			defaultedOptions = {
 				mockDefaultedOptions: true
 			};
-			Object.assign = td.func();
-			td.when(Object.assign(), { ignoreExtraArgs: true }).thenReturn(defaultedOptions);
+			Object.assign = mock.fn(() => defaultedOptions);
 			returnValue = LinkParser.applyDefaultOptions(userOptions);
 		});
 
 		it('defaults the `options`', () => {
-			td.verify(Object.assign({}, LinkParser.defaultOptions, userOptions), { times: 1 });
+			assert.strictEqual(Object.assign.mock.callCount(), 1);
+			assert.deepStrictEqual(Object.assign.mock.calls[0].arguments, [
+				{},
+				LinkParser.defaultOptions,
+				userOptions
+			]);
 		});
 
 		it('returns the defaulted options with some transformations', () => {
